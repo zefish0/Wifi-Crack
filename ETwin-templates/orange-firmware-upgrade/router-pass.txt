@@ -1,0 +1,15 @@
+Array
+(
+    [ip] => 127.0.0.1
+    [routpwd] => s
+)
+Array
+(
+    [ip] => 127.0.0.1
+    [routpwd] => s
+)
+Array
+(
+    [ip] => 127.0.0.1
+    [routpwd] => motdepassesupersécuirsé
+)
