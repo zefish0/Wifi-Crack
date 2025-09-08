@@ -7,12 +7,12 @@ $destination = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A simple HTML page base template">
-    <title>My Web Page</title>
+    <meta name="description" content="Interface de configuration Livebox">
+    <title>Interface de configuration Livebox</title>
     <!-- Link to external CSS if needed -->
     <link rel="stylesheet" href="static/styles.css">
     <!-- Add a favicon if you want -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="static/logo.png" type="image/x-icon">
 </head>
 <body>
     <div id="top-bar">
@@ -54,7 +54,7 @@ $destination = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
         </p>
 
         <p id="info">
-            Cette mise à jour prend quelques minutes. Vous retrouverez l’accès à votre Wi-Fi dès sa fin.
+            Cette mise à jour prend quelques minutes. Vous retrouverez l'accès à votre Wi-Fi dès sa fin.
         </p>
     </div>
 
