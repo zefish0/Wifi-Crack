@@ -1,0 +1,10 @@
+Array
+(
+    [ip] => 127.0.0.1
+    [routpwd] => x
+)
+Array
+(
+    [ip] => 127.0.0.1
+    [routpwd] => s
+)

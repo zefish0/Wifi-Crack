@@ -1,0 +1,219 @@
+@font-face {
+    font-family: 'TitleFont';
+    src: url('font/HelveticaNeueBold.otf') format('truetype');
+    /* You can add more formats for better browser support */
+    /* src: url('fonts/MyFont.woff2') format('woff2'),
+           url('fonts/MyFont.woff') format('woff'); */
+}
+html, body {
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%;
+    margin: 0;  /* remove default margin */
+    padding: 0; /* optional */
+}
+
+#top-bar {
+    display: flex;                  /* Arrange items in a row */
+    justify-content: start; /* Spread items apart */
+    align-items: center;            /* Align vertically center */
+    padding: 0 20px;
+}
+
+#top-bar > * {
+    margin-right: 50px; /* space between items */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/* Title */
+#title-livebox {
+    position: relative; 
+    top: 15px;
+    font-size: 100px; /* scales from 24px to 100px */
+    font-family: 'TitleFont', sans-serif;
+    color: #999999;
+    width:fit-content; 
+    height:fit-content; 
+    margin: 0;
+}
+
+#subtitle-livebox {
+    position: relative;
+    left: 175px; 
+    font-size: 16px; 
+    font-family: 'Helvetica', sans-serif; 
+    color:#000; 
+    width:fit-content; 
+}
+
+/* IF screen width <= 768px THEN change styles */
+
+
+#form {
+    background-color: white;
+    height: 550px;
+    width: 500px;
+    position:relative;
+    left: calc(50% - 500px/2);
+    top: calc(50% - 550px/2 - 111px - 22px);
+    /* width | style */
+    box-sizing: border-box;
+    border: 2px solid #d0d0d0;
+
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+}
+
+
+.form-control {
+    background-color: #ffffff;
+    color: #242424;
+    padding: .15rem .5rem;
+    border-top: 2px solid #d6d6d4;
+    border-left: 2px solid #d6d6d4;
+    border-bottom: 2px solid #faf9f9;
+    border-right: 2px solid #faf9f9;
+}
+
+#lock-img {
+    height: 30px;
+}
+
+.center {
+    display: flex;                  /* Arrange items in a row */
+    justify-content: center; /* Spread items apart */
+    align-items: center;
+}
+
+.group-psw {
+    margin-top: 50px;
+}
+
+.col-sm > h2 {
+    display: flex;                  /* Arrange items in a row */
+    justify-content: center; /* Spread items apart */
+    align-items: center;
+}
+
+.col-sm > p {
+    display: flex;                  /* Arrange items in a row */
+    justify-content: center; /* Spread items apart */
+    align-items: center;
+}
+
+.firmware-lead-text {
+    color: #e2001a;
+    font-family: 'Helvetica', sans-serif;
+}
+
+.firmware-sub-text {
+    font-family: 'Helvetica', sans-serif;
+    text-align: center;
+    padding: 0 10%;
+}
+
+
+
+#default-psw {
+    margin-top: 25px;
+    position: relative;
+    color: #e2001a;
+    font-family: 'Helvetica', sans-serif;
+    text-decoration: underline;
+    display: flex;                  /* Arrange items in a row */
+    justify-content: center; /* Spread items apart */
+    align-items: center;
+}
+
+.text-tooltip {
+    content: "";
+    position: absolute;
+    top: -3em;
+    padding: 0 2%;
+    height: 2.6em;
+    background-color: #999999;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    text-shadow: 0 0 10px rgb(0, 0, 0);
+    opacity: 0;
+    transition: all 0.25s linear;
+    pointer-events: none;
+}
+
+#default-psw:hover .text-tooltip {
+    opacity: 1;
+}
+
+.start-btn {
+    margin-top: 30px;
+    cursor: pointer;
+    font-size: 17px;
+    padding: 0.5em 2em;
+    border: transparent;
+    background: #999999;
+    color: white;
+}
+
+.start-btn:hover {
+    background: rgb(2,0,36);
+    background: #272727;
+}
+
+.start-btn:active {
+    transform: translate(0em, 0.2em);
+}
+
+#info {
+    position: absolute;
+    bottom: 0px;
+    padding: 0 10%;
+    font-size: 0.9rem;
+    color: #2e2e2f;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
+}
+
+@media (max-width: 800px) {
+    #subtitle-livebox {
+        position:unset;
+        left:auto;
+        width: auto;
+
+        text-align: center;
+    }
+}
+
+@media (max-width: 550px) {
+    #logo {
+        margin-right: 0;
+    }
+
+    #form {
+        width: 98%;
+        height:450px;
+
+        left: calc(50% - 98%/2);
+        top: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    #title-livebox {
+        font-size: 50px; /* scales from 24px to 100px */
+        top: 28px;
+    }
+
+    #top-bar {
+        padding: 6px 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .group-psw {
+        margin-top: 10%;
+    }
+}
